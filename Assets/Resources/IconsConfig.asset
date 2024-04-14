@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42ce6f0e0d6e1d444a83f1430f91b9e0, type: 3}
+  m_Name: IconsConfig
+  m_EditorClassIdentifier: 
+  OfferIcons:
+  - Name: Coal
+    Icon: {fileID: 21300000, guid: c11a5b6fcbd67e24ea9f444f82a752a8, type: 3}
+  - Name: Grass
+    Icon: {fileID: 21300000, guid: e1eeef4ef46756e44a410a6edf5a0697, type: 3}
+  - Name: Log
+    Icon: {fileID: 21300000, guid: ed2025e754a8da541a78bbb319d5df56, type: 3}
+  - Name: Metal
+    Icon: {fileID: 21300000, guid: 22a18a4ed79ba2b46b9a6f3780077ced, type: 3}
+  - Name: Rope
+    Icon: {fileID: 21300000, guid: 11e2056f1bef4d84ea26a2fc2589bf13, type: 3}
+  - Name: Stone
+    Icon: {fileID: 21300000, guid: 5ba5be1cdd41c584ea72667e4fe4b1bd, type: 3}
+  OfferImages:
+  - Name: BuilderKit
+    Icon: {fileID: 21300000, guid: 19af01a5a759c4d4aaee23d7bb4f4e7a, type: 3}
+  - Name: BuildingResources
+    Icon: {fileID: 21300000, guid: 2337a989cb489854d882d5ffb90a98d8, type: 3}
