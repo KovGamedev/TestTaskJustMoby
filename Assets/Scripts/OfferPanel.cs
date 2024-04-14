@@ -14,6 +14,7 @@ public class OfferPanel : MonoBehaviour
     [SerializeField] private Image _offerImage;
     [SerializeField] private TextMeshProUGUI _priceWithDiscount;
     [SerializeField] private TextMeshProUGUI _wholePrice;
+    [SerializeField] private GameObject _discountPanel;
     [SerializeField] private TextMeshProUGUI _discount;
 
     public void SetData(OfferDto offerDto)
@@ -23,16 +24,33 @@ public class OfferPanel : MonoBehaviour
 
         _title.text = offerDto.Title;
         _description.text = offerDto.Description;
-        for (var i = 0; i < _resourcesIcons.Count; i++ ) {
-            if (i < offerDto.ResourcesIcons.Length) {
+        for (var i = 0; i < _resourcesIcons.Count; i++)
+        {
+            if (i < offerDto.ResourcesIcons.Length)
+            {
+                _resourcesIcons[i].gameObject.SetActive(true);
                 _resourcesIcons[i].SetIcon(GetIconByName(offerDto.ResourcesIcons[i]));
                 _resourcesIcons[i].SetQuantity(offerDto.ResourcesQuantities[i]);
             }
+            else
+            {
+                _resourcesIcons[i].gameObject.SetActive(false);
+            }
         }
         _offerImage.sprite = GetImageByName(offerDto.OfferImage);
-        _priceWithDiscount.text = (offerDto.Price * (1f - offerDto.Discount)).ToString("F2");
-        _wholePrice.text = offerDto.Price.ToString("F2");
-        _discount.text = FormatPercentages(offerDto.Discount);
+        if (offerDto.Discount == 0)
+        {
+            _discountPanel.SetActive(false);
+            _wholePrice.gameObject.SetActive(false);
+        }
+        else
+        {
+            _discountPanel.SetActive(true);
+            _discount.text = FormatPercentages(offerDto.Discount);
+            _wholePrice.gameObject.SetActive(true);
+            _wholePrice.text = offerDto.Price.ToString("F2");
+        }
+        _priceWithDiscount.text = FormatCurrency(offerDto.Price * (1f - offerDto.Discount));
     }
 
     private Sprite GetIconByName(string iconName)
@@ -43,6 +61,12 @@ public class OfferPanel : MonoBehaviour
     private Sprite GetImageByName(string iconName)
     {
         return _iconsConfig.OfferImages.Find(namedIcon => namedIcon.Name == iconName).Icon;
+    }
+
+    private string FormatCurrency(float sum)
+    {
+        var currentCurrencyObtainedFromSomeConfigsOrFromTheServer = "$";
+        return $"{currentCurrencyObtainedFromSomeConfigsOrFromTheServer}{sum.ToString("F2")}";
     }
 
     private string FormatPercentages(float percentage)
