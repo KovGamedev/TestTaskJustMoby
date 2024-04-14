@@ -16,22 +16,7 @@ public class OfferPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _wholePrice;
     [SerializeField] private TextMeshProUGUI _discount;
 
-    private void Start()
-    {
-        var mockDto = new OfferDto(
-            "Ресурсы для стройки",
-            "Покори небеса, построй плот своей мечты",
-            "BuilderKit",
-            new string[6] { "Coal", "Grass", "Log", "Metal", "Rope", "Stone" },
-            new int[6] { 20, 20, 20, 20, 20, 20 },
-            2.99f,
-            3.33f,
-            0.1f
-        );
-        SetData(mockDto);
-    }
-
-    private void SetData(OfferDto offerDto)
+    public void SetData(OfferDto offerDto)
     {
         if (offerDto.ResourcesIcons.Length != offerDto.ResourcesQuantities.Length)
             throw new Exception($"Icons info length is invalid");
@@ -45,8 +30,8 @@ public class OfferPanel : MonoBehaviour
             }
         }
         _offerImage.sprite = GetImageByName(offerDto.OfferImage);
-        _priceWithDiscount.text = Math.Round(offerDto.PriceWithDiscount, 2).ToString();
-        _wholePrice.text = Math.Round(offerDto.WholePrice, 2).ToString();
+        _priceWithDiscount.text = (offerDto.Price * (1f - offerDto.Discount)).ToString("F2");
+        _wholePrice.text = offerDto.Price.ToString("F2");
         _discount.text = FormatPercentages(offerDto.Discount);
     }
 
