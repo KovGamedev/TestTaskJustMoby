@@ -24,6 +24,7 @@ public class OfferPanel : MonoBehaviour
 
         _title.text = offerDto.Title;
         _description.text = offerDto.Description;
+        _resourcesLines[1].SetActive(_resourcesLines[1].transform.childCount < offerDto.ResourcesIcons.Length);
         for (var i = 0; i < _resourcesIcons.Count; i++)
         {
             if (i < offerDto.ResourcesIcons.Length)
