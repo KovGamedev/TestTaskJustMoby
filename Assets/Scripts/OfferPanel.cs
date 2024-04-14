@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class OfferPanel : MonoBehaviour
 {
+    [SerializeField] private GameObject _infoPanel;
+    [SerializeField] private TextMeshProUGUI _info;
     [SerializeField] private IconsConfig _iconsConfig;
     [SerializeField] private TextMeshProUGUI _title;
     [SerializeField] private TextMeshProUGUI _description;
@@ -19,8 +21,14 @@ public class OfferPanel : MonoBehaviour
 
     public void SetData(OfferDto offerDto)
     {
+        if (!gameObject.activeSelf)
+            return;
         if (offerDto.ResourcesIcons.Length != offerDto.ResourcesQuantities.Length)
+        {
+            _info.text = "Что-то пошло не так :(";
             throw new Exception($"Icons info length is invalid");
+        }
+        _infoPanel.SetActive(false);
 
         _title.text = offerDto.Title;
         _description.text = offerDto.Description;
@@ -76,5 +84,10 @@ public class OfferPanel : MonoBehaviour
             throw new Exception($"Percentage must be between 0 and 1, provided: {percentage}");
 
         return $"-{percentage * 100}%";
+    }
+
+    private void OnDisable()
+    {
+        _infoPanel.SetActive(true);
     }
 }

@@ -11,11 +11,6 @@ public class OfferRequester : MonoBehaviour
 
     [SerializeField] private float _testDelay;
 
-    private void Start()
-    {
-        QueryOffer();
-    }
-
     public void QueryOffer()
     {
         StartCoroutine(GetOffer0());
