@@ -6,8 +6,7 @@ using UnityEngine.Networking;
 
 public class OfferRequester : MonoBehaviour
 {
-    public UnityEvent<OfferDto> _offer0Received = new UnityEvent<OfferDto>();
-
+    [SerializeField] private UnityEvent<OfferDto> _offer0Received = new UnityEvent<OfferDto>();
     [SerializeField] private float _testDelay;
 
     public void QueryOffer()

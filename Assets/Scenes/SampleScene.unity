@@ -7250,6 +7250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiCamera: {fileID: 835035429}
+  _validatableOfferPanel: {fileID: 1764625558}
 --- !u!1 &1558764813
 GameObject:
   m_ObjectHideFlags: 0
@@ -7450,7 +7451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d77ac95871b4b14e8e86d191200856f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offerPanel: {fileID: 1764625558}
   _resourcesQuantityMin: 3
   _resourcesQuantityMax: 6
   _placeholder: {fileID: 1047235107}

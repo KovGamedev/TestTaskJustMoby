@@ -1,18 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
 public class InputValidator : MonoBehaviour
 {
-    [SerializeField] private OfferPanel _offerPanel;
     [SerializeField] private int _resourcesQuantityMin;
     [SerializeField] private int _resourcesQuantityMax;
     [SerializeField] private TextMeshProUGUI _placeholder;
 
+    private OfferPanel _offerPanel;
+
     private TMP_InputField _inputField;
+
+    [Inject]
+    public void Construct(OfferPanel offerPanel)
+    {
+        _offerPanel = offerPanel;
+    }
 
     public void Validate()
     {
