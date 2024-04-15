@@ -19,6 +19,21 @@ public class OfferPanel : MonoBehaviour
     [SerializeField] private GameObject _discountPanel;
     [SerializeField] private TextMeshProUGUI _discount;
 
+    public void ChangeResourcesQuantity(int quantity)
+    {
+        if (quantity < Mathf.RoundToInt(0.5f * _resourcesIcons.Count) || _resourcesIcons.Count < quantity)
+            throw new Exception($"Incorrect resources quantity: {quantity}");
+
+        _resourcesLines[1].SetActive(_resourcesLines[1].transform.childCount < quantity);
+        for (var i = Mathf.FloorToInt(0.5f * _resourcesIcons.Count); i < _resourcesIcons.Count; i++)
+        {
+            if (i < quantity)
+                _resourcesIcons[i].gameObject.SetActive(true);
+            else
+                _resourcesIcons[i].gameObject.SetActive(false);
+        }
+    }
+
     public void SetData(OfferDto offerDto)
     {
         if (!gameObject.activeSelf)
@@ -26,9 +41,11 @@ public class OfferPanel : MonoBehaviour
         if (offerDto.ResourcesIcons.Length != offerDto.ResourcesQuantities.Length)
         {
             _info.text = "Что-то пошло не так :(";
-            throw new Exception($"Icons info length is invalid");
+            throw new Exception("Icons info length is invalid");
         }
-        _infoPanel.SetActive(false);
+
+        if (_infoPanel != null)
+            _infoPanel?.SetActive(false);
 
         _title.text = offerDto.Title;
         _description.text = offerDto.Description;
@@ -88,6 +105,7 @@ public class OfferPanel : MonoBehaviour
 
     private void OnDisable()
     {
-        _infoPanel.SetActive(true);
+        if (_infoPanel != null)
+            _infoPanel.SetActive(true);
     }
 }
